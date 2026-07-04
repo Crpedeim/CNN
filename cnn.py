@@ -105,6 +105,8 @@ class CNNFilter():
         dinput = dinput_padded[:, padding:padding+H, padding:padding+W]
 
         # Update weights
+        self.dkernel = dkernel
+        self.dbias = dbias
         self.kernel -= alpha * dkernel
         self.bias -= alpha * dbias
 
@@ -187,13 +189,7 @@ class MaxPool():
 
     def backward(self, dout):
         """
-        Gradient only flows to the position that was the max.
-        
-        YOUR BUG: you looped over ALL input positions and checked 
-        'if target_idx in self.Maxindices' — O(n²) and wrong mapping.
-        
-        Instead: iterate through stored indices in order (same order as output).
-        Each output position maps to exactly one input position.
+        Gradient only flows to the position that was the max
         """
         dinput = np.zeros(self.input_shape)
         depth, outH, outW = dout.shape
@@ -239,6 +235,8 @@ class FC():
         db = dout
         dinput = self.weights.T @ dout  # use old weights FIRST
 
+        self.dW = dW
+        self.db = db
         self.weights -= alpha * dW     # update AFTER
         self.bias -= alpha * db
 
