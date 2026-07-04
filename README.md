@@ -18,6 +18,8 @@ Every layer implements its own `forward` and `backward`, with gradients derived 
 
 Supporting pieces: **He initialization** (`√(2/fan_in)`) for the ReLU layers, **5-fold cross-validation** split, **gradient clipping** for stability, and per-sample SGD.
 
+- **Verified correctness** : every analytical gradient (convolution, max-pooling, ReLU, fully-connected) is checked against finite-difference numerical gradients via gradient_check.py, agreeing to a relative error of ~2×10⁻⁸.
+
 ---
 
 ## Architecture
