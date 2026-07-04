@@ -16,7 +16,7 @@ Every layer implements its own `forward` and `backward`, with gradients derived 
 - **Fully-connected** — `dW`, `db`, and `dinput` computed with the pre-update weights before the SGD step.
 - **Softmax + cross-entropy** — the combined gradient simplifies to `(prediction − label)`, derived and used directly.
 
-Supporting pieces: **He initialization** (`√(2/fan_in)`) for the ReLU layers, **5-fold cross-validation** split, **gradient clipping** for stability, and per-sample SGD.
+- **Supporting pieces** : **He initialization** (`√(2/fan_in)`) for the ReLU layers, **5-fold cross-validation** split, **gradient clipping** for stability, and per-sample SGD.
 
 - **Verified correctness** : every analytical gradient (convolution, max-pooling, ReLU, fully-connected) is checked against finite-difference numerical gradients via gradient_check.py, agreeing to a relative error of ~2×10⁻⁸.
 
